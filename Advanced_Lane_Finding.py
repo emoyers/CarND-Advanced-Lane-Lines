@@ -169,8 +169,20 @@ y_low_d = 0
 #generating the array for destination points
 dst = np.float32([[x_low_d, y_top_d],[x_low_d, y_low_d],[x_top_d, y_low_d],[x_top_d, y_top_d]])
 
+prespective_images = {}
+fig = plt.figure(figsize=(100, 100))
 for key, image in binary_images.items() :
     print (key)
-    prespective_transform(image,src,dst)
+    f_prespective_image = prespective_transform(image,src,dst)
+    prespective_images["presp_"+key] = f_prespective_image
 
 #PERSPECTIVE TRANSFORM
+
+fig = plt.figure(figsize=(20, 20))
+count = 1
+for key, image in prespective_images.items() :
+    print (key)
+    fig.add_subplot(4, 2, count)
+    plt.imshow(image, cmap='gray')
+    count += 1
+plt.show()
